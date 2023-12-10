@@ -8,6 +8,7 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BaseAdvertisement implements Advertisement{
 
+	private static final String AD_PLAYING_TEMPL = "Ad playing [%s] weight [%s]";
 	private int maxAppearance;
 	private double weight;
 	private final Hashtable<Integer, Integer> allAppearances = new Hashtable<>();
@@ -38,7 +39,7 @@ public class BaseAdvertisement implements Advertisement{
 
 	@Override
 	public void showAdvertisement() {
-		System.out.println("Ad playing [" + this.hashCode() + "]");
+		System.out.println(AD_PLAYING_TEMPL.formatted(this.hashCode(), this.weight));
 	}
 
 	@Override

@@ -6,9 +6,12 @@ import java.util.Optional;
 public final class AdComparators {
 
 	public static Comparator<Advertisement> byWeight() {
-		return Comparator.comparing(Advertisement::getWeight);
+		return Comparator.comparing(Advertisement::getWeight, Comparator.reverseOrder());
 	}
 
+	/*
+	Ha valamelyik meg nem volt lejatszva akkor az lesz az elso, egyebkent a regebben lejatszott.
+	 */
 	public static Comparator<Advertisement> byPlayHistory() {
 		return (ad1, ad2) -> {
 			boolean ad1Appeared = AdHistory.INSTANCE.adAppeared(ad1);
@@ -25,12 +28,6 @@ public final class AdComparators {
 						.findFirst();
 				return first.get() == ad1 ? -1 : 1;
 			}
-//				Optional<Advertisement> first = AdHistory.INSTANCE.getHistory().keySet().stream()
-//						.filter(ad -> ad1 == ad || ad2 == ad)
-//						.findFirst();
-//				return first.isPresent() ?
-//						first.get() == ad1 ? -1 : 1
-//						: 0;
 		};
 	}
 

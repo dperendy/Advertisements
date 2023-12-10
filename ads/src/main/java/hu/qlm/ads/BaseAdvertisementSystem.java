@@ -22,7 +22,7 @@ public class BaseAdvertisementSystem implements AdvertisementSystem{
 	public void showNextAdvertisement(int dayIndex) {
 		Optional<Advertisement> toBePlayed = getAdvertisementList().stream()
 				.filter(ad -> AdFilters.byMaxAppearance(ad, dayIndex))
-				.filter(AdFilters::byNotLastPlayed)
+				.filter(AdFilters::byNotInLastNAds)
 				.sorted(AdComparators.byWeight()
 						.thenComparing(AdComparators.byPlayHistory())
 						.thenComparing(AdComparators.byRegistryPosition()))

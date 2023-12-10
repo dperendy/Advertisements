@@ -27,7 +27,7 @@ public class AdsRestController {
 
 	@PostMapping(path = "/registerAds")
 	public ResponseEntity<String> registerAds(@RequestBody List<BaseAdvertisement> ads) {
-		ads.forEach(ad -> sys.registerAdvertisement(ad));
+		ads.forEach(sys::registerAdvertisement);
 		return ResponseEntity.ok().build();
 	}
 

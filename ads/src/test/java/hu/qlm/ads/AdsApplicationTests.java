@@ -28,7 +28,7 @@ class AdsApplicationTests {
 				sys.showNextAdvertisement(day);
 			}
 		}
-		sys.getAdvertisementList();
+		// assert something somehow
 	}
 
 }

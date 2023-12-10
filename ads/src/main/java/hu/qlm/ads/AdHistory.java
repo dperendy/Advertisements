@@ -1,11 +1,15 @@
 package hu.qlm.ads;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public enum AdHistory {
 	INSTANCE;
 
+	/*
+	Egy Ad csak egyszer szerepel benne.
+	 */
 	private final Map<Advertisement, Integer> history = new LinkedHashMap<>(16, .75f, true);
 	private Advertisement lastPlayed;
 
@@ -26,4 +30,5 @@ public enum AdHistory {
 	public Advertisement getLastPlayed() {
 		return lastPlayed;
 	}
+
 }
