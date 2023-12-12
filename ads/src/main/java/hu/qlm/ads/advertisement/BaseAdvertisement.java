@@ -1,12 +1,17 @@
-package hu.qlm.ads;
+package hu.qlm.ads.advertisement;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import hu.qlm.ads.sys.BaseAdvertisementSystem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Hashtable;
 import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BaseAdvertisement implements Advertisement{
+public class BaseAdvertisement implements Advertisement {
+
+	private static final Logger LOG = LoggerFactory.getLogger(BaseAdvertisement.class);
 
 	private static final String AD_PLAYING_TEMPL = "Ad playing [%s] weight [%s]";
 	private int maxAppearance;
@@ -39,7 +44,7 @@ public class BaseAdvertisement implements Advertisement{
 
 	@Override
 	public void showAdvertisement() {
-		System.out.println(AD_PLAYING_TEMPL.formatted(this.hashCode(), this.weight));
+		// LOG.info(AD_PLAYING_TEMPL.formatted(this.hashCode(), this.weight));
 	}
 
 	@Override
@@ -53,5 +58,27 @@ public class BaseAdvertisement implements Advertisement{
 
 	public void setWeight(double weight) {
 		this.weight = weight;
+	}
+
+	/**
+	 * Fennmarado lejatszhatosagok szama.
+	 *
+	 * @param dayIndex
+	 * @param dayLimit
+	 * @return
+	 */
+	public int remainingAppearancesByDay(int dayIndex, int dayLimit) {
+		return maxAppearance - lastAppearence(dayIndex, dayLimit);
+	}
+
+	/**
+	 * Adott reklam eddigi osszes lejatszasanak szama.
+	 *
+	 * @return
+	 */
+	public int getAllAppearancesSum() {
+		return allAppearances.values().stream()
+				.mapToInt(Integer::intValue)
+				.sum();
 	}
 }

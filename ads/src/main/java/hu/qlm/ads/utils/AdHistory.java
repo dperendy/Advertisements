@@ -1,7 +1,8 @@
-package hu.qlm.ads;
+package hu.qlm.ads.utils;
+
+import hu.qlm.ads.advertisement.Advertisement;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public enum AdHistory {
@@ -15,7 +16,7 @@ public enum AdHistory {
 
 
 	public void recordAdAppearance(Advertisement ad) {
-		history.merge(ad, 1, (o,n) -> ++o);
+		history.merge(ad, 1, (o, n) -> ++o);
 		lastPlayed = ad;
 	}
 
